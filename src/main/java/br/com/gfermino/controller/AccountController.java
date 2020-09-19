@@ -43,21 +43,21 @@ public class AccountController {
 	
 	@RequestMapping(name = "/event", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public  ResponseEntity<Object> event(@RequestBody AccountVo vo)   {
-		Map<String, String> rtn = new LinkedHashMap<>();
+		Map<String, Object> rtn = new LinkedHashMap<>();
 		
 		if(vo.getType().equals("deposit")){
-			rtn.put("destination", this.services.deposit(vo).toString());
+			rtn.put("destination", this.services.deposit(vo));
 
 		}
 		else if(vo.getType().equals("withdraw")){
-			rtn.put("origin", this.services.withdraw(vo).toString());
+			rtn.put("origin", this.services.withdraw(vo));
 		}
 		else {
 			//transfer
 			this.services.transfer(vo);
 	
-			rtn.put("origin", this.services.findById(vo.getOrigin()).toString());
-			rtn.put("destination", this.services.findById(vo.getDestination()).toString());
+			rtn.put("origin", this.services.findById(vo.getOrigin()));
+			rtn.put("destination", this.services.findById(vo.getDestination()));
 
 		}
 				
