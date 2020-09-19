@@ -17,6 +17,10 @@ public class AccountService {
 		accounts=new  ArrayList<Account>();
 	}
 	
+	public void reset() {
+		accounts.clear();
+	}
+	
 	public Account create(AccountVo vo ) {
 		Account account=new Account();
 		account.setId(vo.getDestination());
